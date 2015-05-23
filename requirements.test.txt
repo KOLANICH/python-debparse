@@ -1,0 +1,6 @@
+pytest 
+git+git://github.com/mverteuil/pytest-ipdb.git 
+pytest-sugar
+pytest-pep8
+pretend
+mock
