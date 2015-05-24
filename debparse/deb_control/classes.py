@@ -47,6 +47,7 @@ class ControlData(Stub):
         return collections.OrderedDict([
             (package.id, package)
             for package in self.packages
+            if package.type == 'binary'
         ])
 
 
