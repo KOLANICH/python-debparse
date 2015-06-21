@@ -85,7 +85,10 @@ def parse_field_value(raw_value, meta=None):
             separator = '\n'
         list_items = utils.split_string(
             raw_value, separator=separator, strip=True, skip_blank=True)
-        return [parse_typed_field_value(li, meta) for li in list_items]
+        return classes.ListField(
+            [parse_typed_field_value(li, meta) for li in list_items],
+            _raw=raw_value,
+        )
     else:
         return parse_typed_field_value(raw_value, meta)
 

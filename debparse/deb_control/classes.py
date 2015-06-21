@@ -111,6 +111,11 @@ class SimpleField(FieldValue):
     pass
 
 
+class ListField(FieldValue, list):
+    def __repr__(self):
+        return list.__repr__(self)
+
+
 class ContactField(FieldValue):
     pass
 

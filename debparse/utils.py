@@ -1,11 +1,13 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+import codecs
+
 from functools import partial
 
 
 def get_file_contents(path):
-    with open(path) as f:
+    with codecs.open(path, "r", "utf-8") as f:
         return f.read()
 
 
