@@ -125,7 +125,10 @@ def test_parse_field_type_dependency(input, expected):
         assert parsed_relation == relation
 
         parsed_version = parsed.restriction and parsed.restriction.version
-        assert parsed_version == version
+        if version is not None:
+            assert str(parsed_version) == version
+        else:
+            assert parsed_version is None
         assert parsed.architecture == architecture
 
     if isinstance(expected, list):

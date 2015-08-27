@@ -5,6 +5,7 @@ import re
 import logging
 
 from debparse import utils
+from debparse.common.versions import Version
 from . import classes
 
 
@@ -227,7 +228,7 @@ def _build_dependency_class(parsed, raw_value, meta):
             name=name,
             restriction=classes.Restriction(
                 relation=relation,
-                version=version,
+                version=Version.from_string(version),
             ) if version else None,
             architecture=architecture,
         )
