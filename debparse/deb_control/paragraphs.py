@@ -28,6 +28,8 @@ def get_raw_paragraphs(data):
     for line in lines:
         if line:
             # start or continue form stanza
+            if line.startswith('#'):
+                continue
             lines_buffer.append(line)
         elif not line and lines_buffer:
             # end of paragraph
