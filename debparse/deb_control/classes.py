@@ -86,6 +86,9 @@ class Package(Stub, collections.OrderedDict):
         if self.type == 'binary':
             return self['Package'].text
 
+    def __hash__(self):
+        return hash(self.type) ^ hash(self.id)
+
 # TODO:
 #   * Every field value must be FieldValue inheritor, it
 #   should have type, format or is_list at least. So we need to make
