@@ -3,9 +3,9 @@
 
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
 
 
 with open('README.rst') as readme_file:
@@ -31,9 +31,7 @@ setup(
     author="Kirill Sibirev",
     author_email='l0kix2@gmail.com',
     url='https://github.com/l0kix2/debparse',
-    packages=[
-        'debparse',
-    ],
+    packages=find_packages(),
     package_dir={'debparse':
                  'debparse'},
     include_package_data=True,
