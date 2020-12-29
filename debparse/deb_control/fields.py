@@ -1,5 +1,5 @@
 # coding: utf-8
-from __future__ import unicode_literals
+
 
 import re
 import logging
@@ -57,7 +57,7 @@ def get_raw_key_value(data):
 
 
 def lookup_field_spec(key):
-    for canonical_name, spec in FIELDS.items():
+    for canonical_name, spec in list(FIELDS.items()):
         if key.lower() == canonical_name.lower():
             return canonical_name, spec
     return 'Unknown', 'single/simple'
@@ -106,15 +106,14 @@ def parse_field_type_simple(raw_value, meta=None):
         text=raw_value
     )
 
-
+personRx = re.compile(r"^\s*(.+)\s*(?:<\s*([^>]+?)\s*>)?\s*$")
 def parse_field_type_contact(raw_value, meta=None):
-    name, email = raw_value.rsplit(' ', 1)
-    parsed_email = email.strip('<>')
+    name, email = personRx.match(raw_value).groups()
     return classes.ContactField(
         _raw=raw_value,
         meta=meta,
         name=name,
-        email=parsed_email,
+        email=email,
     )
 
 

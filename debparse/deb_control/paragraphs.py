@@ -3,7 +3,7 @@
 About debian control file format read
 https://www.debian.org/doc/debian-policy/ch-controlfields.html
 """
-from __future__ import unicode_literals
+
 
 
 from debparse import utils
@@ -40,7 +40,7 @@ def get_raw_paragraphs(data):
     if lines_buffer:
         raw_paragraphs.append(lines_buffer)
 
-    return map(utils.join_string_list_with_newline, raw_paragraphs)
+    return list(map(utils.join_string_list_with_newline, raw_paragraphs))
 
 
 def parse_paragraph(data):
@@ -49,7 +49,7 @@ def parse_paragraph(data):
     Each paragraph consists of a series of data fields.
     """
     raw_fields = get_raw_fields(data)
-    parsed_fields = map(fields.parse_field, raw_fields)
+    parsed_fields = list(map(fields.parse_field, raw_fields))
     return classes.Package(
         parsed_fields,
         _raw=data,
@@ -82,7 +82,7 @@ def get_raw_fields(data):
     if lines_buffer:
         raw_fields.append(lines_buffer)
 
-    return map(utils.join_string_list_with_space, raw_fields)
+    return list(map(utils.join_string_list_with_space, raw_fields))
 
 
 

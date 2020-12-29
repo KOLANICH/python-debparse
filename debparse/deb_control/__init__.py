@@ -1,5 +1,5 @@
 # coding: utf-8
-from __future__ import unicode_literals
+
 
 from debparse import utils
 
@@ -16,7 +16,7 @@ def parse(path=None, data=None):
         data = utils.get_file_contents(path)
 
     raw_paragraphs = paragraphs.get_raw_paragraphs(data)
-    parsed_paragraphs = map(paragraphs.parse_paragraph, raw_paragraphs)
+    parsed_paragraphs = list(map(paragraphs.parse_paragraph, raw_paragraphs))
     return classes.ControlData(
         _raw=data,
         _path=path,

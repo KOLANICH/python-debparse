@@ -1,5 +1,5 @@
 # coding: utf-8
-from __future__ import unicode_literals
+
 
 import collections
 
@@ -12,11 +12,13 @@ class Stub(object):
     valid_attribures = ANY
 
     def __init__(self, *args, **kwargs):
-        for key, value in kwargs.items():
+        new_kwargs = type(kwargs)()
+        for key, value in list(kwargs.items()):
             if self.valid_attribures == ANY or key in self.valid_attribures:
-                kwargs.pop(key)
                 setattr(self, key, value)
-        super(Stub, self).__init__(*args, **kwargs)
+            else:
+                new_kwargs[key] = value
+        super(Stub, self).__init__(*args, **new_kwargs)
 
     def __repr__(self):
         return '<%s: %s>' % (
@@ -61,7 +63,7 @@ class Package(Stub, collections.OrderedDict):
     )
 
     def __getitem__(self, item):
-        if not isinstance(item, basestring):
+        if not isinstance(item, str):
             raise TypeError(item)
         for key in self:
             if item.lower() == key.lower():
@@ -69,7 +71,7 @@ class Package(Stub, collections.OrderedDict):
         raise KeyError(item)
 
     def _repr_data(self):
-        return str(self.keys())
+        return str(list(self.keys()))
 
     @property
     def type(self):
