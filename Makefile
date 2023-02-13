@@ -58,12 +58,12 @@ docs:
 	open docs/_build/html/index.html
 
 release: clean
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
+	rm -rf ./dist
+	python3 -m build -ws
+	twine upload ./dist/
 
 dist: clean
-	python setup.py sdist
-	python setup.py bdist_wheel
+	python3 -m build -ws
 	ls -l dist
 
 install: clean
